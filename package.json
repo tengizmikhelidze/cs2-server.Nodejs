@@ -1,0 +1,19 @@
+{
+  "name": "cs2-server.nodejs",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "��#\u0000 \u0000c\u0000s\u00002\u0000-\u0000s\u0000e\u0000r\u0000v\u0000e\u0000r\u0000.\u0000N\u0000o\u0000d\u0000e\u0000j\u0000s\u0000\r\u0000 \u0000",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/server.mjs",
+    "dev": "nodemon src/server.mjs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "mysql2": "^3.12.0"
+  }
+}
