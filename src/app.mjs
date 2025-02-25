@@ -17,6 +17,7 @@ app.use(express.json());
 app.get('/cs2/servers',  async (req, res) => {
     try {
         const servers = await queryMasterServer(`${SERVER_IP}:${SERVER_PORT}`, undefined, undefined, 30000);
+        console.log(servers)
         res.json(servers);
     } catch (err) {
         console.error(err);
