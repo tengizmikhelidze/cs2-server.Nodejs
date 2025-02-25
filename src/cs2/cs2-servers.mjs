@@ -9,6 +9,10 @@ const port = 3000;
 const SERVER_IP = '5.189.166.19'; // e.g., '123.45.67.89'
 const SERVER_PORT = 5555; // Default port for CS servers
 
+app.use(cors({
+    origin: 'http://localhost:4200', // Adjust to the correct origin
+}));
+
 app.get('/cs2/servers', (req, res) => {
     const query = new SteamServerQuery(SERVER_IP, SERVER_PORT);
 
