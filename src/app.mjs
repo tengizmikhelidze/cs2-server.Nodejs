@@ -1,6 +1,6 @@
 import express from 'express';
 import cors from "cors";
-import SteamServerQuery from "steam-server-query";
+import {queryMasterServer} from "steam-server-query";
 
 const app = express();
 const SERVER_IP = '5.189.166.19'; // e.g., '123.45.67.89'
@@ -14,16 +14,12 @@ app.use(cors({
 
 app.use(express.json());
 
-app.get('/cs2/servers', (req, res) => {
-    const query = new SteamServerQuery(SERVER_IP, SERVER_PORT);
-
-    query.getInfo()
-        .then(info => {
-            res.json(info);
-        })
-        .catch(error => {
-            console.error(error);
-        });
+app.get('/cs2/servers',  (req, res) => {
+    queryMasterServer(`${SERVER_IP}:${SERVER_PORT}`, undefined, undefined, 30000).then(servers => {
+        console.log(servers);
+    }).catch((err) => {
+        console.error(err);
+    });
 });
 
 export default app;
