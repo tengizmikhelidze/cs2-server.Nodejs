@@ -1,6 +1,7 @@
 // src/server.mjs
 import express from 'express';
 import SteamServerQuery from 'steam-server-query'; // Import the package
+import cors from 'cors';
 
 const app = express();
 const port = 3000;
