@@ -1,6 +1,6 @@
-import express, {response} from 'express';
+import express from 'express';
 import cors from "cors";
-import {queryMasterServer} from "steam-server-query";
+import {queryGameServerInfo} from "steam-server-query";
 
 const app = express();
 const SERVER_IP = '5.189.166.19'; // e.g., '123.45.67.89'
@@ -14,9 +14,9 @@ app.use(cors({
 
 app.use(express.json());
 
-app.get('/cs2/servers',  async (req, res) => {
+app.get('/api/cs2/servers',  async (req, res) => {
     try {
-        const servers = await queryMasterServer(`${SERVER_IP}:${SERVER_PORT}`, undefined, undefined, 30000);
+        const servers = await queryGameServerInfo(`${SERVER_IP}:${SERVER_PORT}`);
         console.log(servers)
         res.json(servers);
     } catch (err) {
