@@ -5,7 +5,7 @@ import cors from "cors";
 const app = express();
 
 app.use(cors({
-    origin: 'http://localhost:4200',  // Allow only your frontend app
+    origin: '*',  // Allow only your frontend app
     methods: ['GET', 'POST'],        // Allow only GET and POST methods (if needed)
     allowedHeaders: ['Content-Type'], // Allow specific headers (if needed)
 }));
