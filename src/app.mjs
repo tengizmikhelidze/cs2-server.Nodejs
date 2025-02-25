@@ -1,4 +1,4 @@
-import express from 'express';
+import express, {response} from 'express';
 import cors from "cors";
 import {queryMasterServer} from "steam-server-query";
 
@@ -14,12 +14,14 @@ app.use(cors({
 
 app.use(express.json());
 
-app.get('/cs2/servers',  (req, res) => {
-    queryMasterServer(`${SERVER_IP}:${SERVER_PORT}`, undefined, undefined, 30000).then(servers => {
-        console.log(servers);
-    }).catch((err) => {
+app.get('/cs2/servers',  async (req, res) => {
+    try {
+        const servers = await queryMasterServer(`${SERVER_IP}:${SERVER_PORT}`, undefined, undefined, 30000);
+        res.json(servers);
+    } catch (err) {
         console.error(err);
-    });
+        res.status(500).json({ error: 'Failed to fetch servers' });
+    }
 });
 
 export default app;
