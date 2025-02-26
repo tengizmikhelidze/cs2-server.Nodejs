@@ -12,7 +12,6 @@ function serializeBigInt(obj) {
 export const getServers = async (req, res) => {
     try {
         const servers = await queryGameServerInfo(`${SERVER_IP}:${SERVER_PORT}`);
-        console.log(servers);
         const serializedServers = serializeBigInt(servers);
         res.json(serializedServers);
     } catch (err) {
