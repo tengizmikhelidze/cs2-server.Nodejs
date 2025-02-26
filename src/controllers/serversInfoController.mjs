@@ -59,14 +59,23 @@ export const getServers = async (req, res) => {
 export const getServerPlayersInfo = async (req, res) => {
     try {
         const errors = {};
+        let totalPlayersCount = 0;
 
         const [execute1Server, retake1Server] = await Promise.all([
             fetchServerPlayersInfo(process.env.SERVERS_IP, process.env.EXECUTE_SERVER_PORT)
+                .then((data)=> {
+                    totalPlayersCount += (data.playerCount || 0);
+                    return data;
+                })
                 .catch((err) => {
                     errors['execute1'] = err.message;
                     return null;
                 }),
             fetchServerPlayersInfo(process.env.SERVERS_IP, process.env.RETAKE_SERVER_PORT)
+                .then((data)=> {
+                    totalPlayersCount += (data.playerCount || 0);
+                    return data;
+                })
                 .catch((err) => {
                     errors['retake1'] = err.message;
                     return null;
@@ -80,6 +89,7 @@ export const getServerPlayersInfo = async (req, res) => {
         res.json({
             execute1: execute1Server,
             retake1: retake1Server,
+            totalPlayersCount: totalPlayersCount,
             errors: Object.keys(errors).length ? errors : undefined,
         });
 
