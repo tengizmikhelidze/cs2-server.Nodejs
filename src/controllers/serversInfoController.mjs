@@ -1,8 +1,5 @@
 import { queryGameServerInfo } from 'steam-server-query';
 
-const SERVER_IP = '5.189.166.19';
-const SERVER_PORT = 5555;
-
 function serializeBigInt(obj) {
     return JSON.parse(JSON.stringify(obj, (key, value) =>
         typeof value === 'bigint' ? value.toString() : value
