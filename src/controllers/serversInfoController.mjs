@@ -29,7 +29,6 @@ export const getServers = async (req, res) => {
 
         res.json(serverInfo);
     } catch (err) {
-        console.error(err);
         res.status(500).json({ error: 'Failed to fetch servers' });
     }
 };
