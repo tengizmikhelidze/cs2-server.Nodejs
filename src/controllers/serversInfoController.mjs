@@ -11,18 +11,21 @@ function serializeBigInt(obj) {
 
 export const getServers = async (req, res) => {
     try {
-        const execute1Server = serializeBigInt(
-            await getExecute1Server()
-                .catch(
-                    ()=> ({})
-                )
-        );
-        const retake1Server =serializeBigInt(
-            await getRetake1Server()
-                .catch(
-                    ()=> ({})
-                )
-        );
+        const execute1Server =  await getExecute1Server()
+            .catch(
+                (error)=> {
+                    console.log(error)
+                    return {}
+                }
+            )
+
+        const retake1Server = await getRetake1Server()
+            .catch(
+                (error)=> {
+                    console.log(error)
+                    return {}
+                }
+            );
 
         const serverInfo = {
             execute1: execute1Server,
@@ -42,7 +45,7 @@ export const getExecute1Server = async (req, res) => {
         const serializedServers = serializeBigInt(servers);
         res.json(serializedServers);
     } catch (err) {
-        res.status(500).json({ error: 'Failed to fetch servers' });
+        res.status(500).json({ error: err});
     }
 };
 
@@ -52,6 +55,6 @@ export const getRetake1Server = async (req, res) => {
         const serializedServers = serializeBigInt(servers);
         res.json(serializedServers);
     } catch (err) {
-        res.status(500).json({ error: 'Failed to fetch servers' });
+        res.status(500).json({ error: err });
     }
 };
