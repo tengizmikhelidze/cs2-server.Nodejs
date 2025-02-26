@@ -22,7 +22,7 @@ async function connectDB() {
     }
 }
 
-// connectDB();
+connectDB();
 
 // Start Express server
 app.listen(port, () => {
