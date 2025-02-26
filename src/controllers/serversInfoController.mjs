@@ -11,12 +11,12 @@ export const getServers = async (req, res) => {
         const error = {}
 
         const [execute1Server, retake1Server] = await Promise.all([
-            getExecute1Server().catch((error) => {
-                error['execute1'] = error
+            getExecute1Server().catch((err) => {
+                error['execute1'] = err
                 return {};
             }),
-            getRetake1Server().catch((error) => {
-                error['retake1'] = error
+            getRetake1Server().catch((err) => {
+                error['retake1'] = err
                 return {};
             })
         ]);
