@@ -8,20 +8,23 @@ function serializeBigInt(obj) {
 
 export const getServers = async (req, res) => {
     try {
+        const error = {}
+
         const [execute1Server, retake1Server] = await Promise.all([
             getExecute1Server().catch((error) => {
-                console.log(error);
+                error['execute1'] = error
                 return {};
             }),
             getRetake1Server().catch((error) => {
-                console.log(error);
+                error['retake1'] = error
                 return {};
             })
         ]);
 
         const serverInfo = {
             execute1: execute1Server,
-            retake1: retake1Server
+            retake1: retake1Server,
+            error: error
         }
 
         res.json(serverInfo);
